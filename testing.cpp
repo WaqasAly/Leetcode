@@ -2,50 +2,37 @@
 #include <vector>
 #include <string>
 using namespace std;
-
 class Solution {
-public:
-    string longestCommonPrefix(vector<string>& strs) {
-        string result(strs[0].size(), ' ');
-
-        for (int x = 0; x < strs[0].size(); x++) {
-            result[x] = strs[0][x];
-
-            for (int y = 1; y < strs.size(); y++) {
-                if (!isContains(strs[y], result)) {
-                    return result.substr(0, x); // return prefix found so far
+    public:
+        vector<int> twoSum(vector<int>& nums, int target) {
+            vector<int> result;
+            for(int x = 0; x<nums.size(); x++)
+            {
+                for(int y = x + 1; y<nums.size(); y++)
+                {
+                    if((nums[x] + nums[y]) == target)
+                    {
+                        result.push_back(x);
+                        result.push_back(y);
+                        return result;
+                    }
                 }
             }
+            return result;
         }
-
-        return result; // if whole string is common
-    }
-
-    bool isContains(string input, string target) {
-        // checking if input starts with target
-        if (input.find(target) == 0)
-            return true;
-        return false;
-    }
-};
+    };
 
 int main() {
     Solution sol;
-    vector<string> strs;
-    int n;
+    vector<int> nums = {3,2,4};
+    int target = 6;
 
-    cout << "Enter number of strings: ";
-    cin >> n;
-
-    cout << "Enter the strings:\n";
-    for (int i = 0; i < n; i++) {
-        string s;
-        cin >> s;
-        strs.push_back(s);
+    vector<int> result = sol.twoSum(nums, target);
+    cout << "Indices: ";
+    for (int index : result) {
+        cout << index << " ";
     }
-
-    string result = sol.longestCommonPrefix(strs);
-    cout << "Longest Common Prefix: " << result << endl;
+    cout << endl;
 
     return 0;
 }
